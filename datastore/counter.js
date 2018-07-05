@@ -41,21 +41,13 @@ const writeCounter = (count, callback) => {
 
 exports.getNextUniqueId = (callback) => {
   
-  var counterPath = path.join(__dirname, '..', 'datastore', 'data', 'counter.text');
-
   readCounter((err, counter) => {
-    if (err) {
-      console.log(err);
-      return;
-    } else {
-      counter = (counter + 1).toString();
-      writeCounter(counter, callback);
-      return zeroPaddedNumber(counter);
-    }
+    writeCounter(counter + 1, (err, uniqueId) => {
+      callback(err, uniqueId);
+    });
   });
-
-  
 };
+
 
 
 
