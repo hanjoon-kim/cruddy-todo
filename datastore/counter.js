@@ -38,9 +38,23 @@ const writeCounter = (count, callback) => {
 
 // Public API - Fix this function //////////////////////////////////////////////
 
-exports.getNextUniqueId = () => {
-  counter = counter + 1;
-  return zeroPaddedNumber(counter);
+
+exports.getNextUniqueId = (callback) => {
+  
+  var counterPath = path.join(__dirname, '..', 'datastore', 'data', 'counter.text');
+
+  readCounter((err, counter) => {
+    if (err) {
+      console.log(err);
+      return;
+    } else {
+      counter = (counter + 1).toString();
+      writeCounter(counter, callback);
+      return zeroPaddedNumber(counter);
+    }
+  });
+
+  
 };
 
 

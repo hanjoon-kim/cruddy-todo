@@ -19,7 +19,7 @@ const cleanTestDatastore = () => {
   fs.readdirSync(todos.dataDir).forEach(
     todo => fs.unlinkSync(path.join(todos.dataDir, todo))
   );
-}
+};
 
 describe('getNextUniqueId', () => {
   before(initializeTestFiles);

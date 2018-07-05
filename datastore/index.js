@@ -8,9 +8,28 @@ var items = {};
 // Public API - Fix these CRUD functions ///////////////////////////////////////
 
 exports.create = (text, callback) => {
-  var id = counter.getNextUniqueId();
-  items[id] = text;
-  callback(null, {id: id, text: text});
+  var id = counter.getNextUniqueId((err, counter) => {
+    if (err) {
+      console.log(err, 'error');
+    } else {
+      console.log(counter, 'counter');
+      return counter;
+    }
+  });
+  console.log(id, 'ID ME UP');
+  
+
+  var filePath = path.join(__dirname, '..', 'datastore', 'data', id + '.txt');
+  
+  console.log(filePath, 'filePath');
+  fs.writeFile(filePath, text, (err) => {
+    if (err) {
+      return console.log(err);
+    }
+    
+    console.log('File was created');
+  });
+  
 };
 
 exports.readOne = (id, callback) => {
