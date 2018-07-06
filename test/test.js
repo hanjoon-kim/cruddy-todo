@@ -114,23 +114,6 @@ describe('todos', () => {
         done();
       });
     });
-
-    // Refactor this test when completing `readAll`
-    it('should return an array with all saved todos', (done) => {
-      const todo1text = 'todo 1'
-      const todo2text = 'todo 2'
-      const expectedTodoList = [{ id: '00001', text: '00001' }, { id: '00002', text: '00002' }];
-      todos.create(todo1text, (err, todo) => {
-        todos.create(todo2text, (err, todo) => {
-          todos.readAll((err, todoList) => {
-            expect(todoList).to.have.lengthOf(2);
-            expect(todoList).to.deep.include.members(expectedTodoList, 'NOTE: Text field should use the Id initially');
-            done();
-          });
-        });
-      });
-    });
-
   });
 
   describe('readOne', () => {
@@ -183,8 +166,8 @@ describe('todos', () => {
         expect(currentTodoCount).to.equal(initalTodoCount);
         expect(err).to.exist;
         done();
-      })
-    })
+      });
+    });
   });
 
   describe('delete', () => {

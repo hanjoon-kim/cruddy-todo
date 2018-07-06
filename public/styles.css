@@ -1,8 +1,14 @@
 body {
   margin : 20px;
   font-family: arial, sans-serif;
+  background-color: pink;
 }
 
 .todo {
   padding: 3px;
+  color: purple;
+}
+
+h3 {
+  color: blue;
 }
